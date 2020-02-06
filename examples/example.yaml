@@ -1,0 +1,21 @@
+
+---
+classes:
+  - template
+
+template::files:
+ '/etc/sssd/sssd.conf':
+     owner: root
+     group: root
+     mode: '0600'
+     template_path: '/etc/puppet/environments/name/modules/files/files/sssd/sssd.conf.erb'
+ '/etc/sssd/sssd.conf.bak':
+     owner: root
+     group: root
+     mode: '0600'
+     template_path: '/etc/puppet/environments/name/modules/files/files/sssd/sssd.conf.erb'
+ '/etc/sssd/sssd.conf.init':
+     owner: root
+     group: root
+     mode: '0600'
+     template_path: '/etc/puppet/environments/name/modules/files/files/sssd/sssd.conf.init.erb'

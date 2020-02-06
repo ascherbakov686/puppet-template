@@ -1,0 +1,256 @@
+[sssd]
+debug_level = 3
+domains = domain.ru,domain.com,us.domain.com,apac.domain.com,de.domain.com,eu.domain.com,fr.domain.com,uk.domain.com
+domain_resolution_order = us.domain.com,apac.domain.com,de.domain.com,eu.domain.com,fr.domain.com,uk.domain.com,domain.ru,domain.com
+config_file_version = 2
+services = nss
+reconnection_retries = 10
+sbus_timeout = 15
+client_idle_timeout = 86400
+fd_limit = 65536
+timeout = 15
+
+[nss]
+debug_level = 3
+filter_users = impala,root,hive,nobody
+enum_cache_timeout = 2400
+entry_cache_nowait_percentage = 95
+memcache_timeout = 3600
+reconnection_retries = 10
+client_idle_timeout = 86400
+responder_idle_timeout = 86400
+fd_limit = 65536
+timeout = 15
+#cache_first = true
+
+[domain/domain.ru]
+full_name_format = %1$s
+override_homedir = /home/%u
+ldap_user_search_base = DC=avp,DC=ru?sub?(|(memberOf=CN=prj-team,OU=Groups,OU=Clients,DC=domain,DC=ru))
+selinux_provider = none
+subdomain_enumerate = domain.ru,domain.com,us.domain.com,apac.domain.com,de.domain.com,eu.domain.com,fr.domain.com,uk.domain.com
+filter_users = impala,root,hive,nobody
+client_idle_timeout = 86400
+#ad_enable_gc = false
+ldap_idmap_default_domain_sid = S-1-5-21-1430328663-2098613005-1233803906
+#ldap_use_tokengroups = False
+ad_enabled_domains = domain.ru,domain.com,us.domain.com,apac.domain.com,de.domain.com,eu.domain.com,fr.domain.com,uk.domain.com
+dyndns_update = false
+dyndns_update_ptr = false
+debug_level = 3
+ldap_network_timeout = 15
+ldap_sasl_authid = <%= @hostname.upcase %>$@domain.ru
+ad_server = dc1.domain.ru,dc2.domain.ru,dc3.domain.ru,dc4.domain.ru,dc5.domain.ru,dc6.domain.ru,dc7.domain.ru,dc8.domain.ru,dc9.domain.ru
+ad_domain = domain.ru
+#krb5_realm = domain.ru
+#realmd_tags = manages-system joined-with-adcli
+id_provider = ad
+ldap_id_mapping = true
+use_fully_qualified_names = False
+#entry_cache_timeout = 3000
+#refresh_expired_interval = 1200
+ad_hostname = <%= @hostname.upcase %>$@domain.ru
+ignore_group_members = True
+ldap_purge_cache_timeout = 0
+
+[domain/domain.com]
+override_homedir = /home/%u
+ldap_user_search_base = DC=domain,DC=com?sub?(|(memberOf=CN=prj-team,OU=Groups,OU=Clients,DC=domain,DC=ru))
+selinux_provider = none
+subdomain_enumerate = domain.ru,domain.com,us.domain.com,apac.domain.com,de.domain.com,eu.domain.com,fr.domain.com,uk.domain.com
+filter_users = impala,root,hive,nobody
+client_idle_timeout = 86400
+#ad_enable_gc = false
+ldap_idmap_default_domain_sid = S-1-5-21-1500403517-3407623714-97568503
+#ldap_use_tokengroups = False
+ad_enabled_domains = domain.ru,domain.com
+dyndns_update = false
+dyndns_update_ptr = false
+debug_level = 3
+ldap_network_timeout = 15
+ldap_sasl_authid = <%= @hostname.upcase %>$@domain.ru
+ad_domain = domain.com
+ad_server = kaspdc1.domain.com,kaspdc3.domain.com,kaspdc5.domain.com,kaspdc6.domain.com
+id_provider = ad
+ldap_id_mapping = true
+use_fully_qualified_names = False
+#entry_cache_timeout = 3000
+#refresh_expired_interval = 1200
+ad_hostname = <%= @hostname.upcase %>$@domain.ru
+ignore_group_members = True
+ldap_purge_cache_timeout = 0
+
+[domain/us.domain.com]
+override_homedir = /home/%u
+ldap_user_search_base = DC=us,DC=domain,DC=com?sub?(|(memberOf=CN=prj-team,OU=Groups,OU=Clients,DC=domain,DC=ru))
+selinux_provider = none
+subdomain_enumerate = domain.ru,domain.com,us.domain.com,apac.domain.com,de.domain.com,eu.domain.com,fr.domain.com,uk.domain.com
+filter_users = impala,root,hive,nobody
+client_idle_timeout = 86400
+krb5_auth_timeout = 300
+#dns_discovery_domain = us.domain.com
+ad_enable_gc = false
+ldap_idmap_default_domain_sid = S-1-5-21-2595640586-3398857828-3810942505
+#ldap_use_tokengroups = False
+ad_enabled_domains = domain.ru,us.domain.com
+dyndns_update = false
+dyndns_update_ptr = false
+debug_level = 3
+ldap_network_timeout = 15
+ldap_sasl_authid = <%= @hostname.upcase %>$@domain.ru
+id_provider = ad
+ad_server = usdc0.us.domain.com,usdc1.us.domain.com,usdc4.us.domain.com
+ldap_id_mapping = true
+use_fully_qualified_names = False
+#entry_cache_timeout = 3000
+#refresh_expired_interval = 1200
+ad_hostname = <%= @hostname.upcase %>$@domain.ru
+ad_domain = us.domain.com
+ignore_group_members = True
+ldap_purge_cache_timeout = 0
+
+[domain/apac.domain.com]
+override_homedir = /home/%u
+ldap_user_search_base = DC=apac,DC=domain,DC=com?sub?(|(memberOf=CN=prj-team,OU=Groups,OU=Clients,DC=domain,DC=ru))
+selinux_provider = none
+subdomain_enumerate = domain.ru,domain.com,apac.domain.com
+filter_users = impala,root,hive,nobody
+client_idle_timeout = 86400
+krb5_auth_timeout = 300
+#dns_discovery_domain = apac.domain.com
+ad_enable_gc = false
+ldap_idmap_default_domain_sid = S-1-5-21-1315270979-1122687726-71641487
+#ldap_use_tokengroups = False
+ad_enabled_domains = domain.ru,apac.domain.com
+dyndns_update = false
+dyndns_update_ptr = false
+debug_level = 3
+ldap_network_timeout = 15
+ldap_sasl_authid = <%= @hostname.upcase %>$@domain.ru
+id_provider = ad
+ad_server = apacdc0.apac.domain.com,apacdc3.apac.domain.com,apacdc4.apac.domain.com,apacdc5.apac.domain.com
+ldap_id_mapping = true
+use_fully_qualified_names = False
+#entry_cache_timeout = 3000
+#refresh_expired_interval = 1200
+ad_hostname = <%= @hostname.upcase %>$@domain.ru
+ad_domain = apac.domain.com
+ignore_group_members = True
+ldap_purge_cache_timeout = 0
+
+[domain/fr.domain.com]
+override_homedir = /home/%u
+ldap_user_search_base = DC=fr,DC=domain,DC=com?sub?(|(memberOf=CN=prj-team,OU=Groups,OU=Clients,DC=domain,DC=ru))
+selinux_provider = none
+subdomain_enumerate = domain.ru,domain.com,us.domain.com,apac.domain.com,de.domain.com,eu.domain.com,fr.domain.com,uk.domain.com
+filter_users = impala,root,hive,nobody
+client_idle_timeout = 86400
+krb5_auth_timeout = 300
+#dns_discovery_domain = fr.domain.com
+ad_enable_gc = false
+ldap_idmap_default_domain_sid = S-1-5-21-1536585905-1757100226-1330474432
+#ldap_use_tokengroups = False
+ad_enabled_domains = domain.ru,fr.domain.com
+dyndns_update = false
+dyndns_update_ptr = false
+debug_level = 3
+ldap_network_timeout = 15
+ldap_sasl_authid = <%= @hostname.upcase %>$@domain.ru
+id_provider = ad
+ad_server = frdc0.fr.domain.com,frdc1.fr.domain.com
+ldap_id_mapping = true
+use_fully_qualified_names = False
+#entry_cache_timeout = 3000
+#refresh_expired_interval = 1200
+ad_hostname = <%= @hostname.upcase %>$@domain.ru
+ad_domain = fr.domain.com
+ignore_group_members = True
+ldap_purge_cache_timeout = 0
+
+[domain/de.domain.com]
+override_homedir = /home/%u
+ldap_user_search_base = DC=de,DC=domain,DC=com?sub?(|(memberOf=CN=prj-team,OU=Groups,OU=Clients,DC=domain,DC=ru))
+selinux_provider = none
+subdomain_enumerate = domain.ru,domain.com,us.domain.com,apac.domain.com,de.domain.com,eu.domain.com,fr.domain.com,uk.domain.com
+filter_users = impala,root,hive,nobody
+client_idle_timeout = 86400
+krb5_auth_timeout = 300
+#dns_discovery_domain = de.domain.com
+ad_enable_gc = false
+ldap_idmap_default_domain_sid = S-1-5-21-2033198097-956789178-3643714850
+#ldap_use_tokengroups = False
+ad_enabled_domains = domain.ru,de.domain.com
+dyndns_update = false
+dyndns_update_ptr = false
+debug_level = 3
+ldap_network_timeout = 15
+ldap_sasl_authid = <%= @hostname.upcase %>$@domain.ru
+ad_server = dedc0.de.domain.com,dedc1.de.domain.com,dedc3.de.domain.com
+id_provider = ad
+ldap_id_mapping = true
+use_fully_qualified_names = False
+#entry_cache_timeout = 3000
+#refresh_expired_interval = 1200
+ad_hostname = <%= @hostname.upcase %>$@domain.ru
+ad_domain = de.domain.com
+ignore_group_members = True
+ldap_purge_cache_timeout = 0
+
+[domain/eu.domain.com]
+override_homedir = /home/%u
+ldap_user_search_base = DC=eu,DC=domain,DC=com?sub?(|(memberOf=CN=prj-team,OU=Groups,OU=Clients,DC=domain,DC=ru))
+selinux_provider = none
+subdomain_enumerate = domain.ru,domain.com,us.domain.com,apac.domain.com,de.domain.com,eu.domain.com,fr.domain.com,uk.domain.com
+filter_users = impala,root,hive,nobody
+client_idle_timeout = 86400
+krb5_auth_timeout = 300
+#dns_discovery_domain = eu.domain.com
+ad_enable_gc = false
+ldap_idmap_default_domain_sid = S-1-5-21-2106051088-1936898357-3509631986
+#ldap_use_tokengroups = False
+ad_enabled_domains = domain.ru,eu.domain.com
+dyndns_update = false
+dyndns_update_ptr = false
+debug_level = 3
+ldap_network_timeout = 15
+ldap_sasl_authid = <%= @hostname.upcase %>$@domain.ru
+ad_server = eudc0.eu.domain.com,eudc1.eu.domain.com,eudc2.eu.domain.com,eudc3.eu.domain.com,eudc4.eu.domain.com,eudc5.eu.domain.com
+id_provider = ad
+ldap_id_mapping = true
+use_fully_qualified_names = False
+#entry_cache_timeout = 3000
+#refresh_expired_interval = 1200
+ad_hostname = <%= @hostname.upcase %>$@domain.ru
+ad_domain = eu.domain.com
+ignore_group_members = True
+ldap_purge_cache_timeout = 0
+
+[domain/uk.domain.com]
+override_homedir = /home/%u
+ldap_user_search_base = DC=uk,DC=domain,DC=com?sub?(|(memberOf=CN=prj-team,OU=Groups,OU=Clients,DC=domain,DC=ru))
+selinux_provider = none
+subdomain_enumerate = domain.ru,domain.com,us.domain.com,apac.domain.com,de.domain.com,eu.domain.com,fr.domain.com,uk.domain.com
+filter_users = impala,root,hive,nobody
+client_idle_timeout = 86400
+krb5_auth_timeout = 300
+#dns_discovery_domain = uk.domain.com
+ad_enable_gc = false
+ldap_idmap_default_domain_sid = S-1-5-21-107906855-921090097-473669461
+#ldap_use_tokengroups = False
+ad_enabled_domains = domain.ru,uk.domain.com
+dyndns_update = false
+dyndns_update_ptr = false
+debug_level = 3
+ldap_network_timeout = 15
+ldap_sasl_authid = <%= @hostname.upcase %>$@domain.ru
+ad_server = ukdc0.uk.domain.com,ukdc1.uk.domain.com,ukdc3.uk.domain.com
+id_provider = ad
+ldap_id_mapping = true
+use_fully_qualified_names = False
+#entry_cache_timeout = 3000
+#refresh_expired_interval = 1200
+ad_hostname = <%= @hostname.upcase %>$@domain.ru
+ad_domain = uk.domain.com
+ignore_group_members = True
+ldap_purge_cache_timeout = 0
+
